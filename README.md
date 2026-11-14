@@ -164,6 +164,23 @@ The five-page forensic investigation report includes:
 - Four embedded investigation figures.
 - Findings, limitations, and conclusions.
 
+
 ### Supporting Artifacts
 
-Additional Prefetch evidence, analysis exports, integrity records, and investigation notes will be added after review.
+The following files support the investigation findings and document the forensic examination process.
+
+#### Preserved Evidence
+
+- [NOTEPAD.EXE Prefetch Artifact](evidence/NOTEPAD.EXE-C5670914.pf) — Preserved Windows Prefetch evidence used for forensic analysis.
+
+#### Analysis Exports
+
+- [Prefetch Baseline Inventory](exports/prefetch-baseline.csv) — Initial inventory of 188 Prefetch artifacts.
+- [PECmd Notepad Analysis](exports/notepad-prefetch-analysis.csv) — Parsed execution metadata, recorded run count, and historical timestamps.
+- [SHA-256 Evidence Manifest](exports/case-003-sha256-manifest.csv) — Recorded hashes for evidence integrity verification.
+
+#### Investigation Notes
+
+- [Prefetch Header Analysis](notes/prefetch-header-analysis.txt) — Examination of the compressed Prefetch header and uncompressed file size.
+- [Tool Transfer Verification](notes/tool-transfer-verification.txt) — Documentation of forensic software transfer integrity checks.
+- [Prefetch Analysis Findings](notes/prefetch-analysis-findings.txt) — Detailed observations, interpretations, and investigative limitations.
