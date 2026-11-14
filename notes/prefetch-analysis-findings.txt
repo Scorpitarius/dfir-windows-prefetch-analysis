@@ -1,0 +1,70 @@
+CASE 003 - WINDOWS PREFETCH ARTIFACT INVESTIGATION
+
+ANALYSIS FINDINGS
+
+Artifact: NOTEPAD.EXE Prefetch file
+Parser: PECmd version 1.5.0.0
+Analysis source: C:\DFIR-Lab\Case-003\Working
+Preserved evidence: C:\DFIR-Lab\Case-003\Evidence
+
+PURPOSE
+
+Examine a Windows Prefetch artifact to identify evidence of Notepad execution and compare the results with the baseline observations recorded before a controlled execution experiment.
+
+OBSERVATIONS
+
+1. The Notepad Prefetch artifact existed before the controlled experiment.
+
+2. The baseline LastWriteTimeUtc was 2026-11-01 18:28:32 UTC.
+
+3. After the experiment, the preserved evidence copy had a LastWriteTimeUtc of 2026-11-02 21:13:06 UTC.
+
+4. PECmd version 1.5.0.0 successfully parsed the working copy.
+
+5. PECmd identified the executable as NOTEPAD.EXE and reported Prefetch hash C5670914.
+
+6. The reported run count was 11.
+
+7. The most recent recorded execution timestamp was 2026-11-02 21:12:56 UTC. The UTC offset (+00:00) was confirmed using PECmd's custom timestamp format option.
+
+8. PECmd reported seven additional historical execution timestamps.
+
+9. The most recent recorded execution timestamp preceded the Prefetch file's modification timestamp by 10 seconds.
+
+10. The Prefetch parser reported an uncompressed file size of 48,152 bytes, consistent with the uncompressed length identified during the file-header examination.
+
+INTERPRETATION
+
+The Prefetch artifact contains evidence that Windows recorded executions of NOTEPAD.EXE, including an execution on November 2, 2026.
+
+The Prefetch file's modification timestamp advanced between the baseline observation and subsequent evidence collection.
+
+The recorded execution timestamp and updated filesystem modification timestamp are consistent with the controlled Notepad execution experiment.
+
+However, the exact timestamp of the controlled Start-Process command was not independently recovered from the available notes. Therefore, the last recorded execution cannot be conclusively attributed to that specific command.
+
+The run count of 11 reflects historical execution information maintained in the Prefetch artifact and does not indicate 11 executions during the controlled experiment.
+
+LIMITATIONS
+
+Prefetch records are evidence of program execution but do not establish what a user did within an application.
+
+The absence of a Prefetch artifact would not, by itself, prove that a program was never executed.
+
+The analysis was conducted using a working copy rather than modifying the preserved evidence copy.
+
+CONCLUSION
+
+The investigation identified a valid Windows Prefetch artifact associated with NOTEPAD.EXE. PECmd reported a run count of 11 and a most recent execution timestamp of 2026-11-02 21:12:56 UTC.
+
+The artifact was modified after the baseline observation, and the recorded execution time is consistent with the controlled Notepad experiment. The exact launch-to-artifact correlation remains qualified because the original experiment start timestamp was not independently confirmed.
+
+SUPPORTING SCREENSHOTS
+
+01-prefetch-baseline.png
+02-notepad-prefetch-before-execution.png
+03-notepad-prefetch-after-execution.png
+04-notepad-evidence-hash-verification.png
+05-prefetch-file-header.png
+07-pecmd-tool-verification.png
+08-notepad-prefetch-parsed.png

@@ -1,0 +1,12 @@
+Case ID: DFIR-003
+Artifact: Windows Notepad Prefetch working copy
+Header bytes examined: 16
+Header (hex): 4D-41-4D-04-18-BC-00-00-A5-A7-A6-A9-B9-A7-AA-A9
+Signature: MAM
+Compression indicator: 0x04
+Expected decompressed size: 48152 bytes
+
+Interpretation:
+The artifact contains a compressed Prefetch header.
+The header alone does not establish execution time or run count.
+Further examination requires a compatible Prefetch parser.

@@ -1,0 +1,52 @@
+Case 003 — Tool Transfer Integrity Verification
+
+Case ID: DFIR-003  
+Activity: Forensic Tool Transfer and Integrity Verification  
+Date: November 4, 2026  
+Environment: Windows 10 VM, VMware Workstation Pro  
+Network Configuration: Isolated VMnet2 host-only network
+
+## Purpose
+
+To verify that forensic software packages transferred from the host computer to the Windows 10 virtual machine retained the same file contents as the downloaded packages.
+
+## Procedure
+
+1. Downloaded forensic software packages onto the host computer.
+2. Generated SHA-256 hashes for the downloaded packages and recorded the results in dfir-tool-download-hashes.csv.
+3. Updated the reference CSV with SHA-512 values for dotnet-runtime-10.0.14-win-x64.exe and windowsdesktop-runtime-10.0.14-win-x64.exe, using the publisher-provided hash values.
+4. Transferred the software packages to C:\DFIR-Lab\Tools on the Windows 10 VM.
+5. Calculated the hash of each transferred file using PowerShell's Get-FileHash cmdlet and the corresponding SHA-256 or SHA-512 algorithm.
+6. Compared each calculated hash against its recorded reference value using PowerShell's -eq equality operator.
+7. Captured a screenshot showing the verification results.
+
+## Verification Method
+
+The following PowerShell command structure was used:
+
+(Get-FileHash "C:\DFIR-Lab\Tools\<filename>" -Algorithm SHA256).Hash -eq "<reference hash>"
+
+For the two .NET runtime installers, SHA-512 was used instead of SHA-256.
+
+The -eq operator returned True for each tested file, indicating that the calculated hashes matched the recorded reference values.
+
+## Results
+
+All tested software packages returned True during hash comparison.
+
+The results support that the transferred packages matched their recorded reference hashes at the time of verification.
+
+For packages whose reference hashes were generated on the host computer, this verifies consistency between the host reference and transferred files. It does not independently authenticate the publisher.
+
+For the two .NET installers, the reference SHA-512 hashes were obtained from the publisher.
+
+## Supporting Artifacts
+
+- dfir-tool-download-hashes.csv — Recorded reference hashes
+- Screenshots\06-tool-hash-verification.png — PowerShell hash comparison results
+
+## Limitations
+
+This verification establishes file-content consistency relative to the recorded reference hashes. It does not independently establish that all downloaded software is trustworthy or free from malicious code.
+
+## Conclusion: The tested forensic software packages passed the recorded hash comparisons, supporting the integrity of the tool transfer process.
