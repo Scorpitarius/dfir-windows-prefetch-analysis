@@ -147,6 +147,23 @@ The artifact's modification timestamp advanced following the baseline examinatio
 
 The investigation demonstrates how Windows Prefetch artifacts can support execution-timeline reconstruction when combined with baseline observations, forensic parsing, and documented evidence-integrity checks.
 
+
 ## Supporting Documentation
 
-The complete investigation report and supporting forensic artifacts will be added after review.
+### Investigation Report
+
+[View DFIR-003 Windows Prefetch Artifact Investigation Report](Case-003-Prefetch-Investigation.pdf)
+
+The five-page forensic investigation report includes:
+
+- Prefetch configuration and baseline examination.
+- Controlled Notepad execution experiment.
+- Evidence preservation and SHA-256 integrity verification.
+- Prefetch file header examination.
+- PECmd execution history and artifact analysis.
+- Four embedded investigation figures.
+- Findings, limitations, and conclusions.
+
+### Supporting Artifacts
+
+Additional Prefetch evidence, analysis exports, integrity records, and investigation notes will be added after review.
